@@ -1,9 +1,8 @@
-from graphics import Window
+from maze import Maze
 
 def main():
-    win = Window(width=600, height=600)
-    win.draw_line((0, 0), (300, 300))
-    win.mainloop()
+    maze = Maze(num_rows=10, num_cols=10, cell_size=60)
+    maze.start()
 
 if __name__ == "__main__":
     main()
