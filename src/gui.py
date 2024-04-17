@@ -21,7 +21,6 @@ class Window:
 
         self.__root.columnconfigure(0, weight=1)
         self.__root.rowconfigure(0, weight=1)
-        self.__root.eval('tk::PlaceWindow . center')
 
         self.__action_count = 0
 
@@ -31,9 +30,9 @@ class Window:
     def delete_canvas_item(self, item_id: int) -> None:
         self.__canvas.delete(item_id)
 
-    def animate(self, callback) -> None:
+    def delay_execution(self, callback, ms=MS_DELAY_BETWEEN_ACTIONS) -> None:
         self.__action_count += 1
-        self.__root.after(MS_DELAY_BETWEEN_ACTIONS * self.__action_count, callback)
+        self.__root.after(ms * self.__action_count, callback)
 
     def mainloop(self):
         self.__root.mainloop()
