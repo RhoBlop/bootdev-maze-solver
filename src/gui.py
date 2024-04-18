@@ -1,38 +1,64 @@
-from textwrap import fill
 import tkinter as ttk
+from typing import Literal
 
 LINE_WIDTH = 3
 LINE_FILL_COLOR = "#000"
 #
 CANVAS_BG = "#fff"
 ROOT_BG = "#fff" # not configured yet
-MS_DELAY_BETWEEN_ACTIONS = 10
 
 # (x, y) coordinates
-type Point = tuple[int, int]
+type Point = tuple[float, float]
 
 class Window:
-    def __init__(self, width: int, height: int, canvas_padding: int = 0) -> None:
+    def __init__(self, width: int, height: int, 
+                 root_bg: str, canvas_bg: str, canvas_padding: int,
+                 wall_line_width: int, wall_line_color: str, solving_line_width: int, solving_line_color: str,
+                 solving_line_color_backtrack: str
+                 ) -> None:
         self.__root = ttk.Tk()
         self.__root.title("Maze Solver")
         self.__root.minsize(width=width+50, height=height+50)
-        self.__canvas = ttk.Canvas(self.__root, bg="#fff", width=width+canvas_padding, height=height+canvas_padding, border=0, highlightthickness=0)
+        self.__root.configure(background=root_bg)
+        self.__canvas = ttk.Canvas(self.__root, bg=canvas_bg, width=width+canvas_padding, height=height+canvas_padding, border=0, highlightthickness=0)
         self.__canvas.grid(column=0, row=0)
 
         self.__root.columnconfigure(0, weight=1)
         self.__root.rowconfigure(0, weight=1)
 
-        self.__action_count = 0
+        self.__current_delay = 0  # used for delaying the maze visualization
+        self.__config = {
+            "canvas_padding": canvas_padding,
+            "wall_line_width": wall_line_width,
+            "wall_line_color": wall_line_color,
+            "solving_line_width": solving_line_width,
+            "solving_line_color": solving_line_color,
+            "solving_line_color_backtrack": solving_line_color_backtrack
+        }
 
-    def draw_line(self, p1: Point, p2: Point, tags: str = "") -> int:
-        return self.__canvas.create_line(p1[0], p1[1], p2[0], p2[1], tags=tags, fill=LINE_FILL_COLOR, width=LINE_WIDTH)
+    def get_canvas_pading(self):
+        return self.__config["canvas_padding"]
+
+    def draw_line(self, p1: Point, p2: Point, type: Literal["maze_gen", "maze_solv", "maze_solv_backtrack"]) -> int:
+        if type == "maze_gen":
+            line_width = self.__config["wall_line_width"]
+            fill_color = self.__config["wall_line_color"]
+        elif type == "maze_solv":
+            line_width = self.__config["solving_line_width"]
+            fill_color = self.__config["solving_line_color"]
+        elif type == "maze_solv_backtrack":
+            line_width = self.__config["solving_line_width"]
+            fill_color = self.__config["solving_line_color_backtrack"]
+            
+        return self.__canvas.create_line(p1[0], p1[1], p2[0], p2[1], fill=fill_color, width=line_width)
     
     def delete_canvas_item(self, item_id: int) -> None:
         self.__canvas.delete(item_id)
 
-    def delay_execution(self, callback, ms=MS_DELAY_BETWEEN_ACTIONS) -> None:
-        self.__action_count += 1
-        self.__root.after(ms * self.__action_count, callback)
+    def delay_execution(self, callback, delay_ms) -> None:
+        self.__current_delay += delay_ms
+        self.__root.after(self.__current_delay, callback)
 
     def mainloop(self):
+        self.__root.eval('tk::PlaceWindow . center')  # centers window on screen
         self.__root.mainloop()

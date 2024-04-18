@@ -1,7 +1,9 @@
 import unittest
-from maze import Maze, Cell
+from maze import Maze
 
 RANDOM_SEED = 1
+
+# ========= NOT FINISHED =========
 
 # since there isn't much to test I'll use this class for both Maze and Cell classes
 # also, this test don't account in any way for visuals with tkinter, not in the mood to search how tow
