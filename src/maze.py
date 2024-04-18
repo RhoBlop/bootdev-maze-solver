@@ -136,7 +136,7 @@ class Cell:
     # e.g. one cell has a right wall, but the adjacent to it also has a left wall, so we need to delete both of them to open a path there
     def delete_wall(self, wall_idx):
         if self.__walls[wall_idx]:
-            self.__renderer.delete_canvas_item(self.__walls_canvas_ids[wall_idx])
+            self.__renderer.delay_execution(lambda: self.__renderer.delete_canvas_item(self.__walls_canvas_ids[wall_idx]))
             self.__walls[wall_idx] = False
 
     def get_neighbours_idxs(self, num_rows: int, num_cols: int) -> list[tuple[int, int]]:

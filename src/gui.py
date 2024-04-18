@@ -6,7 +6,7 @@ LINE_FILL_COLOR = "#000"
 #
 CANVAS_BG = "#fff"
 ROOT_BG = "#fff" # not configured yet
-MS_DELAY_BETWEEN_ACTIONS = 500
+MS_DELAY_BETWEEN_ACTIONS = 10
 
 # (x, y) coordinates
 type Point = tuple[int, int]
