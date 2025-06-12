@@ -1,5 +1,5 @@
 import json
-from maze import Maze
+from Maze import Maze
 
 def main():
     with open("config.json", "r") as f:

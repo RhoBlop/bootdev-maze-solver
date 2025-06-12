@@ -1,14 +1,15 @@
 {
-    "SOLVE_AUTOMATICALLY": true,
+    "SHOULD_SOLVE_MAZE": true,
+    "SEED": "",
     
-    "NUM_ROWS": 20,
-    "NUM_COLUMNS": 20,
-    "CELL_SIZE": 40,
+    "NUM_ROWS": 40,
+    "NUM_COLUMNS": 40,
+    "CELL_SIZE": 20,
 
     "ROOT_BG": "#000",
 
     "CANVAS_BG": "#fff",
-    "CANVAS_PADDING": 6,
+    "CANVAS_PADDING": 16,
 
     "WALL_LINE_WIDTH": 4,
     "WALL_LINE_COLOR": "#0ea5e9",
@@ -18,5 +19,5 @@
     "SOLVING_LINE_COLOR_BACKTRACK": "#ddd6fe",
 
     "MS_DELAY_BETWEEN_ACTIONS_MAZE_GENERATION": 5,
-    "MS_DELAY_BETWEEN_ACTIONS_MAZE_SOLVING": 10
+    "MS_DELAY_BETWEEN_ACTIONS_MAZE_SOLVING": 15
 }

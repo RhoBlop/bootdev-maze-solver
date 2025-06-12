@@ -1,12 +1,6 @@
 import tkinter as ttk
 from typing import Literal
 
-LINE_WIDTH = 3
-LINE_FILL_COLOR = "#000"
-#
-CANVAS_BG = "#fff"
-ROOT_BG = "#fff" # not configured yet
-
 # (x, y) coordinates
 type Point = tuple[float, float]
 
