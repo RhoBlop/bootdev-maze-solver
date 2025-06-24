@@ -6,33 +6,35 @@ type MazeMatrix = list[list[Cell]]
 type VisitedCells = list[Cell]
 
 class Maze:
+    # if not AUTO_CELL_SIZE, cell size is used to calculate the window size
     def __init__(self, 
-            NUM_COLUMNS: int = 1, 
-            NUM_ROWS: int = 1, 
-            CELL_SIZE: int = 50, 
+            NUM_COLUMNS: int = 1,
+            NUM_ROWS: int = 1,
+            AUTO_CELL_SIZE: bool = True,
+            CELL_SIZE: int = 0,
             SEED: int | None = None,
-            ROOT_BG: str = "#fff", 
-            CANVAS_BG: str = "#fff", 
+            ROOT_BG: str = "#fff",
+            CANVAS_BG: str = "#fff",
             CANVAS_PADDING: int = 3,
-            WALL_LINE_WIDTH: int = 3, 
-            WALL_LINE_COLOR: str = "#000", 
-            SOLVING_LINE_WIDTH: int = 2, 
+            WALL_LINE_WIDTH: int = 3,
+            WALL_LINE_COLOR: str = "#000",
+            SOLVING_LINE_WIDTH: int = 2,
             SOLVING_LINE_COLOR: str = "#f00",
-            SOLVING_LINE_COLOR_BACKTRACK: str = "#aaa", 
+            SOLVING_LINE_COLOR_BACKTRACK: str = "#aaa",
             SHOULD_SOLVE_MAZE = True,
-            MS_DELAY_BETWEEN_ACTIONS_MAZE_GENERATION: int = 20, 
+            MS_DELAY_BETWEEN_ACTIONS_MAZE_GENERATION: int = 20,
             MS_DELAY_BETWEEN_ACTIONS_MAZE_SOLVING: int = 10
         ) -> None:
         
         window_w, window_h = NUM_COLUMNS * CELL_SIZE, NUM_ROWS * CELL_SIZE
         self.__renderer = Window(
-            width=window_w, 
-            height=window_h, 
-            root_bg=ROOT_BG, 
-            canvas_bg=CANVAS_BG, 
-            canvas_padding=CANVAS_PADDING*2, 
-            wall_line_width=WALL_LINE_WIDTH, 
-            wall_line_color=WALL_LINE_COLOR, 
+            width=window_w,
+            height=window_h,
+            root_bg=ROOT_BG,
+            canvas_bg=CANVAS_BG,
+            canvas_padding=CANVAS_PADDING*2,
+            wall_line_width=WALL_LINE_WIDTH,
+            wall_line_color=WALL_LINE_COLOR,
             solving_line_width=SOLVING_LINE_WIDTH, solving_line_color=SOLVING_LINE_COLOR,
             solving_line_color_backtrack=SOLVING_LINE_COLOR_BACKTRACK
         )

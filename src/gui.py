@@ -1,4 +1,5 @@
-import tkinter as ttk
+import tkinter as tk
+import sys
 from typing import Literal
 
 # (x, y) coordinates
@@ -10,11 +11,17 @@ class Window:
                  wall_line_width: int, wall_line_color: str, solving_line_width: int, solving_line_color: str,
                  solving_line_color_backtrack: str
                  ) -> None:
-        self.__root = ttk.Tk()
+        self.__root = tk.Tk()
+
+        # Maximize window depending on platform
+        if sys.platform.startswith("win"):
+            self.__root.state("zoomed")
+        elif sys.platform.startswith("linux"):
+            self.__root.attributes("-zoomed", True)
+
         self.__root.title("Maze Solver")
-        self.__root.minsize(width=width+50, height=height+50)
         self.__root.configure(background=root_bg)
-        self.__canvas = ttk.Canvas(self.__root, bg=canvas_bg, width=width+canvas_padding, height=height+canvas_padding, border=0, highlightthickness=0)
+        self.__canvas = tk.Canvas(self.__root, bg=canvas_bg, width=width+canvas_padding, height=height+canvas_padding, border=0, highlightthickness=0)
         self.__canvas.grid(column=0, row=0)
 
         self.__root.columnconfigure(0, weight=1)
@@ -34,6 +41,10 @@ class Window:
         return self.__config["canvas_padding"]
 
     def draw_line(self, p1: Point, p2: Point, type: Literal["maze_gen", "maze_solv", "maze_solv_backtrack"]) -> int:
+        line_width = 0
+        fill_color = ""
+
+        # Determine the line width and color based on the type of line
         if type == "maze_gen":
             line_width = self.__config["wall_line_width"]
             fill_color = self.__config["wall_line_color"]
@@ -54,5 +65,4 @@ class Window:
         self.__root.after(self.__current_delay, callback)
 
     def mainloop(self):
-        self.__root.eval('tk::PlaceWindow . center')  # centers window on screen
         self.__root.mainloop()

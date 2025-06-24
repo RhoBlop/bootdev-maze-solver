@@ -4,11 +4,12 @@
     
     "NUM_ROWS": 40,
     "NUM_COLUMNS": 40,
+    "AUTO_CELL_SIZE": true,
     "CELL_SIZE": 20,
 
-    "ROOT_BG": "#000",
+    "ROOT_BG": "#000000",
 
-    "CANVAS_BG": "#fff",
+    "CANVAS_BG": "#ffffff",
     "CANVAS_PADDING": 16,
 
     "WALL_LINE_WIDTH": 4,
