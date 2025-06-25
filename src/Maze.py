@@ -1,3 +1,5 @@
+from calendar import c
+from enum import auto
 import random as rand
 from Cell import Cell
 from gui import Window
@@ -26,10 +28,11 @@ class Maze:
             MS_DELAY_BETWEEN_ACTIONS_MAZE_SOLVING: int = 10
         ) -> None:
         
-        window_w, window_h = NUM_COLUMNS * CELL_SIZE, NUM_ROWS * CELL_SIZE
         self.__renderer = Window(
-            width=window_w,
-            height=window_h,
+            num_cols=NUM_COLUMNS,
+            num_rows=NUM_ROWS,
+            auto_cell_size=AUTO_CELL_SIZE,
+            cell_size=CELL_SIZE,
             root_bg=ROOT_BG,
             canvas_bg=CANVAS_BG,
             canvas_padding=CANVAS_PADDING*2,
@@ -38,7 +41,7 @@ class Maze:
             solving_line_width=SOLVING_LINE_WIDTH, solving_line_color=SOLVING_LINE_COLOR,
             solving_line_color_backtrack=SOLVING_LINE_COLOR_BACKTRACK
         )
-        self.__maze = self._create_cells(NUM_COLUMNS, NUM_ROWS, CELL_SIZE)
+        self.__maze = self._create_cells(NUM_COLUMNS, NUM_ROWS, self.__renderer.get_cell_size())
         self.__dimensions = (NUM_ROWS, NUM_COLUMNS)
         self.__should_solve = SHOULD_SOLVE_MAZE
         self.__ms_config = {

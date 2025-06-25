@@ -3,7 +3,7 @@ from typing import Literal, Self
 
 class Cell:
     def __init__(self, row: int, col: int, side_size: int, window: Window) -> None:
-        canvas_padding = window.get_canvas_pading() / 2
+        canvas_padding = window.get_canvas_padding() / 2
         x, y = (col * side_size) + canvas_padding, (row * side_size) + canvas_padding
         self.__side_size = side_size
         self.__matrix_idx = (row, col)
