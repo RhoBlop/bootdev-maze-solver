@@ -1,6 +1,5 @@
 import tkinter as tk
 import sys
-from turtle import window_height, window_width
 from typing import Literal
 
 # (x, y) coordinates
@@ -30,7 +29,6 @@ class Window:
 
             # assuming height is greater than width
             window_width, window_height = self.__root.winfo_width(), self.__root.winfo_height()
-            print(f"height: {self.__root.winfo_height()}, width: {self.__root.winfo_width()}")
 
             # calculate the cell's side size based on the minimum side of the window
             canvas_width, canvas_height = min(window_width, window_height), min(window_width, window_height)

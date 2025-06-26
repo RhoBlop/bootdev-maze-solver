@@ -1,8 +1,6 @@
-from calendar import c
-from enum import auto
 import random as rand
 from Cell import Cell
-from gui import Window
+from Window import Window
 
 type MazeMatrix = list[list[Cell]]
 type VisitedCells = list[Cell]

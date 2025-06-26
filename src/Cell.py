@@ -1,4 +1,4 @@
-from gui import Window
+from Window import Window
 from typing import Literal, Self
 
 class Cell:
